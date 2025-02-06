@@ -24,6 +24,7 @@ public class View {
             System.out.println("Erro: "+ex.getMessage());
             Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //RODA ESSA BOSTA AÍ CESAR
     }
     
 }
