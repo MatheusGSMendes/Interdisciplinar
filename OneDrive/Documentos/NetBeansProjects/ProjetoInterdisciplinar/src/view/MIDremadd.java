@@ -4,10 +4,13 @@
  */
 package view;
 
+import dao.AlimentoDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Alimento;
-import model.bean.Fruta;
+import java.sql.*;
 
 /**
  *
@@ -197,13 +200,25 @@ public class MIDremadd extends javax.swing.JInternalFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         
-        Alimento a = new Alimento();
-        frutaDAO dao = new frutaDAO();
-                
-        DefaultTableModel addtabela = (DefaultTableModel)jTableadd.getModel();
-        Object[] dados = {jTextFieldNomeadd.getText(), jTextFieldgenero.getText(), jTextFieldumidsolo.getText(),
-        jTextFieldestacao.getText(), jTextFieldtempdear.getText(), jTextFieldumidadear.getText()};
-        addtabela.addRow(dados);
+        Alimento f = new Alimento();
+        AlimentoDAO dao = new AlimentoDAO();
+
+        f.setNome(jTextFieldNomeadd.getText());//nome
+        f.setGenero(jTextFieldgenero.getText());//genero
+        f.setTempArIdeal(Integer.parseInt(jTextFieldumidsolo.getText()));//temp do ar
+        f.setUmidArIdeal(Integer.parseInt(jTextFieldestacao.getText()));//umidade do ar
+        f.setUmidSoloIdeal(Integer.parseInt(jTextFieldtempdear.getText()));//umidade do solo
+        f.setEstacaoIdeal(jTextFieldumidadear.getText());//estação 
+        try {
+            dao.create(f);
+
+            /*DefaultTableModel addtabela = (DefaultTableModel)jTableadd.getModel();
+            Object[] dados = {jTextFieldNomeadd.getText(), jTextFieldgenero.getText(), jTextFieldumidsolo.getText(),
+            jTextFieldestacao.getText(), jTextFieldtempdear.getText(), jTextFieldumidadear.getText()};
+            addtabela.addRow(dados);*/
+        } catch (SQLException ex) {
+            Logger.getLogger(MIDremadd.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jTextFieldNomeaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeaddActionPerformed

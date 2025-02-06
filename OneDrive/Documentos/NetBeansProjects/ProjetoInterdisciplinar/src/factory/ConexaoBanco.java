@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class ConexaoBanco {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/smart_farm";
-    private static final String USER = "root";
-    private static final String SENHA = "Inter2024";
+    private static final String URL = "jdbc:mysql://195.200.2.145:3306/BD_Interdisciplinar";
+    private static final String USER = "arthur_matheus";
+    private static final String SENHA = "S&nh@:Inter25";
 
     public static Connection getConnection() {
 
