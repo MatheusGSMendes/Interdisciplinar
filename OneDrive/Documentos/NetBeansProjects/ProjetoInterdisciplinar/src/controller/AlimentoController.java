@@ -20,6 +20,8 @@ public class AlimentoController {
     //Criar um novo alimento no banco de dados
     public void adicionarAlimento(String nome, String genero, double tempAr, double umidAr, double umidSolo, String estacao) {
         try {
+            //teste
+            
             Alimento alimento = new Alimento(nome, genero, tempAr, umidAr, umidSolo, estacao);
             alimentoDAO.create(alimento);
             System.out.println("Alimento cadastrado com sucesso!");
