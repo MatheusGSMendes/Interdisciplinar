@@ -335,33 +335,15 @@ public class MIDremadd extends javax.swing.JInternalFrame {
     private void jTButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTButtonAtualizarActionPerformed
         // TODO add your handling code here:
 
-        int row = jTableadd.getSelectedRow();
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Selecione um alimento para atualizar!");
-            return;
-        }
-        /*if (idSelecionado == -1) {
-            JOptionPane.showMessageDialog(this, "Selecione um alimento para atualizar!");
-            return;
-        }*/
+        if (jTableadd.getSelectedRow() != -1) {
+    jTableadd.setValueAt(txtNome.getText(), jTableadd.getSelectedRow(), 0);
+    jTableadd.setValueAt(txtGenero.getText(), jTableadd.getSelectedRow(), 1);
+    jTableadd.setValueAt(txtTempAr.getText(), jTableadd.getSelectedRow(), 2);
+    jTableadd.setValueAt(txtUmidAr.getText(), jTableadd.getSelectedRow(), 3);
+    jTableadd.setValueAt(txtUmidSolo.getText(), jTableadd.getSelectedRow(), 4);
+    jTableadd.setValueAt(txtEstacao.getText(), jTableadd.getSelectedRow(), 5);
+}
 
-        try {
-            Alimento alimento = new Alimento();
-            //alimento.setId(idSelecionado);
-            alimento.setNome(txtNome.getText());
-            alimento.setGenero(txtGenero.getText());
-            alimento.setTempArIdeal(Double.parseDouble(txtTempAr.getText()));
-            alimento.setUmidArIdeal(Double.parseDouble(txtUmidAr.getText()));
-            alimento.setUmidSoloIdeal(Double.parseDouble(txtUmidSolo.getText()));
-            alimento.setEstacaoIdeal(txtEstacao.getText());
-
-            daoAlimento.update(alimento);
-            JOptionPane.showMessageDialog(this, "Alimento atualizado com sucesso!");
-            listagemTabela(); // Atualiza a tabela após edição
-            //idSelecionado = -1;
-        } catch (SQLException | NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao atualizar: " + ex.getMessage());
-        }
 
     }//GEN-LAST:event_jTButtonAtualizarActionPerformed
 
