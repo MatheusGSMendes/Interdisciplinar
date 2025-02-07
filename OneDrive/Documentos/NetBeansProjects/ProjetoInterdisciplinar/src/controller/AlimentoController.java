@@ -61,16 +61,16 @@ public class AlimentoController {
         try {
             Alimento alimento = new Alimento(nome, genero, tempAr, umidAr, umidSolo, estacao);
             alimentoDAO.update(alimento);
-            System.out.println("limento atualizado com sucesso!");
+            System.out.println("Alimento atualizado com sucesso!");
         } catch (SQLException e) {
             System.err.println("Erro ao atualizar alimento: " + e.getMessage());
         }
     }
 
     //Remover um alimento do banco de dados
-    public void removerAlimento(int id) {
+    public void removerAlimento(String nome) {
         try {
-            alimentoDAO.delete(id);
+            alimentoDAO.delete(nome);
             System.out.println("Alimento removido com sucesso!");
         } catch (SQLException e) {
             System.err.println("Erro ao remover alimento: " + e.getMessage());

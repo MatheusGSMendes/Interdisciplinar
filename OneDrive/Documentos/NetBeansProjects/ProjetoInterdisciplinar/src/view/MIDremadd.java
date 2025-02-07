@@ -38,12 +38,17 @@ public class MIDremadd extends javax.swing.JInternalFrame {
         // da tabela (uma seleção). Ao selecionar um item da tabela, um evento é disparado e os
         // dados do produto volta para os campos para que atualizações sejam feitas
         jTableadd.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            
+            
+            
             @Override
+            
             public void valueChanged(ListSelectionEvent le) {
 
                 int r = jTableadd.getSelectedRow();
 
                 if (r != -1) {
+                    
                     txtNome.setText(jTableadd.getModel().getValueAt(r, 0).toString());
                     txtGenero.setText(jTableadd.getModel().getValueAt(r, 1).toString());
                     txtTempAr.setText(jTableadd.getModel().getValueAt(r, 2).toString());
@@ -52,8 +57,15 @@ public class MIDremadd extends javax.swing.JInternalFrame {
                     txtEstacao.setText(jTableadd.getModel().getValueAt(r, 5).toString());
 
                 }
+                /*try {
+                    daoAlimento.pegaId(jTableadd.getModel().getValueAt(r, 0).toString());
+                } catch (SQLException ex) {
+                    Logger.getLogger(MIDremadd.class.getName()).log(Level.SEVERE, null, ex);
+                }*/
 
             }
+            
+            
         });
 
     }
@@ -279,8 +291,14 @@ public class MIDremadd extends javax.swing.JInternalFrame {
             daoAlimento.create(f);
             JOptionPane.showMessageDialog(this, "Alimento adicionado com sucesso!");
             listagemTabela(); // Atualiza a tabela após adicionar
-        } catch (SQLException | NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao adicionar: " + ex.getMessage());
+
+        } catch (SQLException ex) {
+            // Verifica se a exceção é devido à restrição UNIQUE
+            if (ex.getErrorCode() == 1062) { // Código 1062 = entrada duplicada no MySQL
+                JOptionPane.showMessageDialog(this, "Erro: Esse alimento já está cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao adicionar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jTButtonAdicionarActionPerformed
 
@@ -299,12 +317,12 @@ public class MIDremadd extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Selecione um alimento para deletar!");
             return;
         }*/
-        
-        int id = Integer.parseInt(jTableadd.getModel().getValueAt(row, 0).toString());
+
+        String nome = jTableadd.getModel().getValueAt(row, 0).toString();
         int confirm = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja deletar esse item?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try {
-                daoAlimento.delete(id);
+                daoAlimento.delete(nome);
                 JOptionPane.showMessageDialog(this, "Alimento removido com sucesso!");
                 listagemTabela(); // Atualiza a tabela após remoção
                 //idSelecionado = -1;
