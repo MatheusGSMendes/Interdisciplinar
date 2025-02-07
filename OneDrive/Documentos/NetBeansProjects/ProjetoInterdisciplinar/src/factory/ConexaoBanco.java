@@ -2,6 +2,7 @@ package factory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ConexaoBanco {
@@ -24,6 +25,10 @@ public class ConexaoBanco {
             throw new RuntimeException("Erro na Conexão!", ex);
         }
 
+    }
+
+    public static void fecharConexao(Connection con, PreparedStatement stmt) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
