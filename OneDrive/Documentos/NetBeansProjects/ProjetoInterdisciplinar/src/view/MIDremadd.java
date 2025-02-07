@@ -5,12 +5,16 @@
 package view;
 
 import dao.AlimentoDAO;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Alimento;
 import java.sql.*;
+import java.util.List;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -18,11 +22,40 @@ import java.sql.*;
  */
 public class MIDremadd extends javax.swing.JInternalFrame {
 
+    AlimentoDAO daoAlimento = new AlimentoDAO();
+    //private int idSelecionado = -1; // Armazena o ID do item selecionado
+
     /**
      * Creates new form MIDremadd
      */
     public MIDremadd() {
         initComponents();
+        getContentPane().setBackground(Color.WHITE);
+
+        this.listagemTabela();
+
+        // Esse trecho do código adiciona um listener (um objeto que fica escutando) para detectar um evento na linha
+        // da tabela (uma seleção). Ao selecionar um item da tabela, um evento é disparado e os
+        // dados do produto volta para os campos para que atualizações sejam feitas
+        jTableadd.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent le) {
+
+                int r = jTableadd.getSelectedRow();
+
+                if (r != -1) {
+                    txtNome.setText(jTableadd.getModel().getValueAt(r, 0).toString());
+                    txtGenero.setText(jTableadd.getModel().getValueAt(r, 1).toString());
+                    txtTempAr.setText(jTableadd.getModel().getValueAt(r, 2).toString());
+                    txtUmidAr.setText(jTableadd.getModel().getValueAt(r, 3).toString());
+                    txtUmidSolo.setText(jTableadd.getModel().getValueAt(r, 4).toString());
+                    txtEstacao.setText(jTableadd.getModel().getValueAt(r, 5).toString());
+
+                }
+
+            }
+        });
+
     }
 
     /**
@@ -36,54 +69,62 @@ public class MIDremadd extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextFieldNomeadd = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextFieldgenero = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextFieldestacao = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextFieldtempdear = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextFieldumidadear = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextFieldumidsolo = new javax.swing.JTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        jLNome = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        jLGenero = new javax.swing.JLabel();
+        txtGenero = new javax.swing.JTextField();
+        jLUmidAr = new javax.swing.JLabel();
+        txtUmidAr = new javax.swing.JTextField();
+        jLUmidSolo = new javax.swing.JLabel();
+        txtUmidSolo = new javax.swing.JTextField();
+        jLEstacao = new javax.swing.JLabel();
+        txtEstacao = new javax.swing.JTextField();
+        jLTempAr = new javax.swing.JLabel();
+        txtTempAr = new javax.swing.JTextField();
+        jTButtonAdicionar = new javax.swing.JToggleButton();
+        jTButtonDeletar = new javax.swing.JToggleButton();
+        jTButtonAtualizar = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableadd = new javax.swing.JTable();
 
         setClosable(true);
 
-        jLabel1.setText("Nome:");
+        jLNome.setText("Nome:");
 
-        jTextFieldNomeadd.addActionListener(new java.awt.event.ActionListener() {
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeaddActionPerformed(evt);
+                txtNomeActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Genero:");
+        jLGenero.setText("Genero:");
 
-        jLabel3.setText("Umidade do ar:");
+        jLUmidAr.setText("Umidade do ar:");
 
-        jLabel4.setText("Umidade do solo:");
+        jLUmidSolo.setText("Umidade do solo:");
 
-        jLabel5.setText("Estação:");
+        jLEstacao.setText("Estação:");
 
-        jLabel6.setText("Temp do ar ideal:");
+        jLTempAr.setText("Temp do ar ideal:");
 
-        jToggleButton1.setText("Adicionar");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        jTButtonAdicionar.setText("Adicionar");
+        jTButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                jTButtonAdicionarActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setText("Deletar");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        jTButtonDeletar.setText("Deletar");
+        jTButtonDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                jTButtonDeletarActionPerformed(evt);
+            }
+        });
+
+        jTButtonAtualizar.setText("Atualizar");
+        jTButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTButtonAtualizarActionPerformed(evt);
             }
         });
 
@@ -95,38 +136,40 @@ public class MIDremadd extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jToggleButton1)
+                        .addComponent(jTButtonAdicionar)
                         .addGap(18, 18, 18)
-                        .addComponent(jToggleButton2)
+                        .addComponent(jTButtonDeletar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTButtonAtualizar)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(jLTempAr)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldumidsolo, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                                .addComponent(txtTempAr, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
+                                    .addComponent(jLNome)
+                                    .addComponent(jLGenero))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldgenero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldNomeadd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtGenero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(35, 35, 35)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addComponent(jLEstacao)
                                 .addGap(110, 110, 110)
-                                .addComponent(jTextFieldumidadear))
+                                .addComponent(txtEstacao))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(jLUmidSolo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                                .addComponent(jTextFieldtempdear, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtUmidSolo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(jLUmidAr)
                                 .addGap(40, 40, 40)
-                                .addComponent(jTextFieldestacao)))))
+                                .addComponent(txtUmidAr)))))
                 .addGap(39, 39, 39))
         );
         jPanel2Layout.setVerticalGroup(
@@ -134,26 +177,27 @@ public class MIDremadd extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldNomeadd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextFieldestacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLNome)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLUmidAr)
+                    .addComponent(txtUmidAr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldgenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextFieldtempdear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLGenero)
+                    .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLUmidSolo)
+                    .addComponent(txtUmidSolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextFieldumidadear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextFieldumidsolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLEstacao)
+                    .addComponent(txtEstacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLTempAr)
+                    .addComponent(txtTempAr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2)))
+                    .addComponent(jTButtonAdicionar)
+                    .addComponent(jTButtonDeletar)
+                    .addComponent(jTButtonAtualizar)))
         );
 
         jTableadd.setModel(new javax.swing.table.DefaultTableModel(
@@ -198,67 +242,131 @@ public class MIDremadd extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        
-        Alimento f = new Alimento();
-        AlimentoDAO dao = new AlimentoDAO();
-
-        f.setNome(jTextFieldNomeadd.getText());//nome
-        f.setGenero(jTextFieldgenero.getText());//genero
-        f.setTempArIdeal(Integer.parseInt(jTextFieldumidsolo.getText()));//temp do ar
-        f.setUmidArIdeal(Integer.parseInt(jTextFieldestacao.getText()));//umidade do ar
-        f.setUmidSoloIdeal(Integer.parseInt(jTextFieldtempdear.getText()));//umidade do solo
-        f.setEstacaoIdeal(jTextFieldumidadear.getText());//estação 
+    private void listagemTabela() {
         try {
-            dao.create(f);
+            DefaultTableModel model = (DefaultTableModel) jTableadd.getModel();
+            model.setRowCount(0); // Limpa a tabela antes de recarregar os dados
 
-            /*DefaultTableModel addtabela = (DefaultTableModel)jTableadd.getModel();
-            Object[] dados = {jTextFieldNomeadd.getText(), jTextFieldgenero.getText(), jTextFieldumidsolo.getText(),
-            jTextFieldestacao.getText(), jTextFieldtempdear.getText(), jTextFieldumidadear.getText()};
-            addtabela.addRow(dados);*/
+            List<Alimento> alimentos = daoAlimento.readAll();
+            for (Alimento alimento : alimentos) {
+                model.addRow(new Object[]{
+                    //alimento.getId(),
+                    alimento.getNome(),
+                    alimento.getGenero(),
+                    alimento.getTempArIdeal(),
+                    alimento.getUmidArIdeal(),
+                    alimento.getUmidSoloIdeal(),
+                    alimento.getEstacaoIdeal()
+                });
+            }
         } catch (SQLException ex) {
             Logger.getLogger(MIDremadd.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
-    private void jTextFieldNomeaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeaddActionPerformed
+    }
+
+    private void jTButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTButtonAdicionarActionPerformed
+
+        try {
+            Alimento f = new Alimento();
+            f.setNome(txtNome.getText());
+            f.setGenero(txtGenero.getText());
+            f.setTempArIdeal(Double.parseDouble(txtTempAr.getText()));
+            f.setUmidArIdeal(Double.parseDouble(txtUmidAr.getText()));
+            f.setUmidSoloIdeal(Double.parseDouble(txtUmidSolo.getText()));
+            f.setEstacaoIdeal(txtEstacao.getText());
+
+            daoAlimento.create(f);
+            JOptionPane.showMessageDialog(this, "Alimento adicionado com sucesso!");
+            listagemTabela(); // Atualiza a tabela após adicionar
+        } catch (SQLException | NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao adicionar: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jTButtonAdicionarActionPerformed
+
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomeaddActionPerformed
+    }//GEN-LAST:event_txtNomeActionPerformed
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+    private void jTButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTButtonDeletarActionPerformed
+
+        int row = jTableadd.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um alimento para deletar!");
+            return;
+        }
+        /*if (idSelecionado == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um alimento para deletar!");
+            return;
+        }*/
         
-        DefaultTableModel remtabela = (DefaultTableModel)jTableadd.getModel();
-        
-        if(jTableadd.getSelectedRowCount() == 1){
-            remtabela.removeRow(jTableadd.getSelectedRow());
-        }else{
-            if(jTableadd.getRowCount()== 0){
-                JOptionPane.showMessageDialog(this, "A tabela está vazia");
-            }else{
-                 JOptionPane.showMessageDialog(this, "por favor selecione uma única linha");
+        int id = Integer.parseInt(jTableadd.getModel().getValueAt(row, 0).toString());
+        int confirm = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja deletar esse item?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                daoAlimento.delete(id);
+                JOptionPane.showMessageDialog(this, "Alimento removido com sucesso!");
+                listagemTabela(); // Atualiza a tabela após remoção
+                //idSelecionado = -1;
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao deletar: " + ex.getMessage());
             }
         }
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    }//GEN-LAST:event_jTButtonDeletarActionPerformed
+
+    private void jTButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTButtonAtualizarActionPerformed
+        // TODO add your handling code here:
+
+        int row = jTableadd.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um alimento para atualizar!");
+            return;
+        }
+        /*if (idSelecionado == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um alimento para atualizar!");
+            return;
+        }*/
+
+        try {
+            Alimento alimento = new Alimento();
+            //alimento.setId(idSelecionado);
+            alimento.setNome(txtNome.getText());
+            alimento.setGenero(txtGenero.getText());
+            alimento.setTempArIdeal(Double.parseDouble(txtTempAr.getText()));
+            alimento.setUmidArIdeal(Double.parseDouble(txtUmidAr.getText()));
+            alimento.setUmidSoloIdeal(Double.parseDouble(txtUmidSolo.getText()));
+            alimento.setEstacaoIdeal(txtEstacao.getText());
+
+            daoAlimento.update(alimento);
+            JOptionPane.showMessageDialog(this, "Alimento atualizado com sucesso!");
+            listagemTabela(); // Atualiza a tabela após edição
+            //idSelecionado = -1;
+        } catch (SQLException | NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar: " + ex.getMessage());
+        }
+
+    }//GEN-LAST:event_jTButtonAtualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLEstacao;
+    private javax.swing.JLabel jLGenero;
+    private javax.swing.JLabel jLNome;
+    private javax.swing.JLabel jLTempAr;
+    private javax.swing.JLabel jLUmidAr;
+    private javax.swing.JLabel jLUmidSolo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton jTButtonAdicionar;
+    private javax.swing.JToggleButton jTButtonAtualizar;
+    private javax.swing.JToggleButton jTButtonDeletar;
     private javax.swing.JTable jTableadd;
-    private javax.swing.JTextField jTextFieldNomeadd;
-    private javax.swing.JTextField jTextFieldestacao;
-    private javax.swing.JTextField jTextFieldgenero;
-    private javax.swing.JTextField jTextFieldtempdear;
-    private javax.swing.JTextField jTextFieldumidadear;
-    private javax.swing.JTextField jTextFieldumidsolo;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JTextField txtEstacao;
+    private javax.swing.JTextField txtGenero;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtTempAr;
+    private javax.swing.JTextField txtUmidAr;
+    private javax.swing.JTextField txtUmidSolo;
     // End of variables declaration//GEN-END:variables
 }

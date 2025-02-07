@@ -61,46 +61,48 @@
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTButtonAdicionar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jToggleButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTButtonDeletar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jTButtonAtualizar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLTempAr" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jTextFieldumidsolo" pref="119" max="32767" attributes="0"/>
+                                      <Component id="txtTempAr" pref="119" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLGenero" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jTextFieldgenero" alignment="1" min="-2" pref="108" max="-2" attributes="0"/>
-                                          <Component id="jTextFieldNomeadd" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
+                                          <Component id="txtGenero" alignment="1" min="-2" pref="108" max="-2" attributes="0"/>
+                                          <Component id="txtNome" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLEstacao" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
-                                      <Component id="jTextFieldumidadear" max="32767" attributes="0"/>
+                                      <Component id="txtEstacao" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLUmidSolo" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace pref="78" max="32767" attributes="0"/>
-                                      <Component id="jTextFieldtempdear" min="-2" pref="127" max="-2" attributes="0"/>
+                                      <Component id="txtUmidSolo" min="-2" pref="127" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLUmidAr" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                      <Component id="jTextFieldestacao" max="32767" attributes="0"/>
+                                      <Component id="txtUmidAr" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -114,94 +116,103 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldNomeadd" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldestacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLUmidAr" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtUmidAr" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldgenero" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldtempdear" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLGenero" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtGenero" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLUmidSolo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtUmidSolo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldumidadear" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldumidsolo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLEstacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtEstacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLTempAr" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTempAr" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="16" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jToggleButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jToggleButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTButtonAdicionar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTButtonDeletar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTButtonAtualizar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="jLNome">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nome:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldNomeadd">
+            <Component class="javax.swing.JTextField" name="txtNome">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldNomeaddActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="jLGenero">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Genero:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldgenero">
+            <Component class="javax.swing.JTextField" name="txtGenero">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
+            <Component class="javax.swing.JLabel" name="jLUmidAr">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Umidade do ar:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldestacao">
+            <Component class="javax.swing.JTextField" name="txtUmidAr">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
+            <Component class="javax.swing.JLabel" name="jLUmidSolo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Umidade do solo:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldtempdear">
+            <Component class="javax.swing.JTextField" name="txtUmidSolo">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel5">
+            <Component class="javax.swing.JLabel" name="jLEstacao">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Esta&#xe7;&#xe3;o:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldumidadear">
+            <Component class="javax.swing.JTextField" name="txtEstacao">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel6">
+            <Component class="javax.swing.JLabel" name="jLTempAr">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Temp do ar ideal:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldumidsolo">
+            <Component class="javax.swing.JTextField" name="txtTempAr">
             </Component>
-            <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+            <Component class="javax.swing.JToggleButton" name="jTButtonAdicionar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Adicionar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTButtonAdicionarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JToggleButton" name="jToggleButton2">
+            <Component class="javax.swing.JToggleButton" name="jTButtonDeletar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Deletar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTButtonDeletarActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="jTButtonAtualizar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Atualizar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTButtonAtualizarActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

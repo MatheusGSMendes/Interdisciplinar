@@ -68,9 +68,9 @@ public class AlimentoController {
     }
 
     //Remover um alimento do banco de dados
-    public void removerAlimento(String nome) {
+    public void removerAlimento(int id) {
         try {
-            alimentoDAO.delete(nome);
+            alimentoDAO.delete(id);
             System.out.println("Alimento removido com sucesso!");
         } catch (SQLException e) {
             System.err.println("Erro ao remover alimento: " + e.getMessage());

@@ -1,6 +1,8 @@
 package model;
 
 public class Alimento {
+
+    //private int id;
     private String nome;
     private String genero;
     private double tempArIdeal;
@@ -21,6 +23,14 @@ public class Alimento {
     }
 
     // Getters e Setters
+    /*public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }*/
+
     public String getNome() {
         return nome;
     }
@@ -71,14 +81,13 @@ public class Alimento {
 
     @Override
     public String toString() {
-        return "Alimento{" +
-                "nome='" + nome + '\'' +
-                ", genero='" + genero + '\'' +
-                ", tempArIdeal=" + tempArIdeal +
-                ", umidArIdeal=" + umidArIdeal +
-                ", umidSoloIdeal=" + umidSoloIdeal +
-                ", estacaoIdeal='" + estacaoIdeal + '\'' +
-                '}';
+        return "Alimento{"
+                + "nome='" + nome + '\''
+                + ", genero='" + genero + '\''
+                + ", tempArIdeal=" + tempArIdeal
+                + ", umidArIdeal=" + umidArIdeal
+                + ", umidSoloIdeal=" + umidSoloIdeal
+                + ", estacaoIdeal='" + estacaoIdeal + '\''
+                + '}';
     }
 }
-

@@ -76,7 +76,7 @@ public class AlimentoDAO {
 
     //UPDATE - Atualizar os dados de um alimento
     public void update(Alimento alimento) throws SQLException {
-        String sql = "UPDATE alimentos SET genero = ?, temp_ar_ideal = ?, umid_ar_ideal = ?, umid_solo_ideal = ?, estacao_ideal = ? WHERE nome = ?";
+        String sql = "UPDATE alimentos SET genero = ?, temp_ar_ideal = ?, umid_ar_ideal = ?, umid_solo_ideal = ?, estacao_ideal = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, alimento.getGenero());
             stmt.setDouble(2, alimento.getTempArIdeal());
@@ -95,10 +95,10 @@ public class AlimentoDAO {
     }
 
     //DELETE - Excluir um alimento pelo nome
-    public void delete(String nome) throws SQLException {
-        String sql = "DELETE FROM alimentos WHERE nome = ?";
+    public void delete(int id) throws SQLException {
+        String sql = "DELETE FROM alimentos WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, nome);
+            stmt.setInt(1, id);
             int rowsDeleted = stmt.executeUpdate();
             
             if (rowsDeleted > 0) {
