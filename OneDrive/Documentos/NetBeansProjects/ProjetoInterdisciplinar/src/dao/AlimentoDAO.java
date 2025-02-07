@@ -19,21 +19,20 @@ public class AlimentoDAO {
     }
 
     public int pegaId(String nome) throws SQLException {
-    String sql = "SELECT id FROM alimentos WHERE nome = ?";
-    
-    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-        stmt.setString(1, nome); // Corrigido: Passa o nome no WHERE
-        
-        try (ResultSet rs = stmt.executeQuery()) {
-            if (rs.next()) {
-                return rs.getInt("id"); // Retorna o ID encontrado
+        String sql = "SELECT id FROM alimentos WHERE nome = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, nome); // Corrigido: Passa o nome no WHERE
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id"); // Retorna o ID encontrado
+                }
             }
         }
-    }
-    
-    return -1; // Retorna -1 caso o alimento não seja encontrado
-}
 
+        return -1; // Retorna -1 caso o alimento não seja encontrado
+    }
 
     //CREATE - Inserir um novo alimento no banco de dados
     public void create(Alimento alimento) throws SQLException {
@@ -93,8 +92,8 @@ public class AlimentoDAO {
     }
 
     //UPDATE - Atualizar os dados de um alimento
-    public void update(Alimento alimento) throws SQLException {
-        String sql = "UPDATE alimentos SET nome = ?, genero = ?, temp_ar_ideal = ?, umid_ar_ideal = ?, umid_solo_ideal = ?, estacao_ideal = ? WHERE id = ?";
+    public void update(Alimento alimento, String nomeAntigo) throws SQLException {
+        String sql = "UPDATE alimentos SET nome = ?, genero = ?, temp_ar_ideal = ?, umid_ar_ideal = ?, umid_solo_ideal = ?, estacao_ideal = ? WHERE nome = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, alimento.getNome());
@@ -103,7 +102,7 @@ public class AlimentoDAO {
             stmt.setDouble(4, alimento.getUmidArIdeal());
             stmt.setDouble(5, alimento.getUmidSoloIdeal());
             stmt.setString(6, alimento.getEstacaoIdeal());
-            stmt.setInt(7, pegaId(alimento.getNome()));
+            stmt.setString(7, nomeAntigo);
             int rowsUpdated = stmt.executeUpdate();
 
             if (rowsUpdated > 0) {
@@ -111,6 +110,8 @@ public class AlimentoDAO {
             } else {
                 System.out.println("Nenhum alimento encontrado para atualização.");
             }
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao tentar atualizar alimento", e);
         }
     }
 

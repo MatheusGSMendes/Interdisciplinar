@@ -38,17 +38,15 @@ public class MIDremadd extends javax.swing.JInternalFrame {
         // da tabela (uma seleção). Ao selecionar um item da tabela, um evento é disparado e os
         // dados do produto volta para os campos para que atualizações sejam feitas
         jTableadd.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            
-            
-            
+
             @Override
-            
+
             public void valueChanged(ListSelectionEvent le) {
 
                 int r = jTableadd.getSelectedRow();
 
                 if (r != -1) {
-                    
+
                     txtNome.setText(jTableadd.getModel().getValueAt(r, 0).toString());
                     txtGenero.setText(jTableadd.getModel().getValueAt(r, 1).toString());
                     txtTempAr.setText(jTableadd.getModel().getValueAt(r, 2).toString());
@@ -64,8 +62,7 @@ public class MIDremadd extends javax.swing.JInternalFrame {
                 }*/
 
             }
-            
-            
+
         });
 
     }
@@ -335,15 +332,35 @@ public class MIDremadd extends javax.swing.JInternalFrame {
     private void jTButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTButtonAtualizarActionPerformed
         // TODO add your handling code here:
 
-        if (jTableadd.getSelectedRow() != -1) {
-    jTableadd.setValueAt(txtNome.getText(), jTableadd.getSelectedRow(), 0);
-    jTableadd.setValueAt(txtGenero.getText(), jTableadd.getSelectedRow(), 1);
-    jTableadd.setValueAt(txtTempAr.getText(), jTableadd.getSelectedRow(), 2);
-    jTableadd.setValueAt(txtUmidAr.getText(), jTableadd.getSelectedRow(), 3);
-    jTableadd.setValueAt(txtUmidSolo.getText(), jTableadd.getSelectedRow(), 4);
-    jTableadd.setValueAt(txtEstacao.getText(), jTableadd.getSelectedRow(), 5);
-}
+        int row = jTableadd.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um alimento para atualizar!");
+            return;
+        }
 
+        try {
+            // Criando o objeto Alimento e preenchendo com os dados dos campos de texto
+            Alimento alimento = new Alimento();
+            alimento.setNome(txtNome.getText());
+            alimento.setGenero(txtGenero.getText());
+            alimento.setTempArIdeal(Double.parseDouble(txtTempAr.getText()));
+            alimento.setUmidArIdeal(Double.parseDouble(txtUmidAr.getText()));
+            alimento.setUmidSoloIdeal(Double.parseDouble(txtUmidSolo.getText()));
+            alimento.setEstacaoIdeal(txtEstacao.getText());
+
+            // Obtendo o nome antigo para a atualização no banco
+            String nomeAntigo = (String) jTableadd.getValueAt(row, 0);
+
+            // Chama o método update para atualizar os dados no banco de dados
+            daoAlimento.update(alimento, nomeAntigo);
+
+            JOptionPane.showMessageDialog(this, "Alimento atualizado com sucesso!");
+
+            // Atualiza a tabela após edição
+            listagemTabela();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar: " + ex.getMessage());
+        }
 
     }//GEN-LAST:event_jTButtonAtualizarActionPerformed
 
