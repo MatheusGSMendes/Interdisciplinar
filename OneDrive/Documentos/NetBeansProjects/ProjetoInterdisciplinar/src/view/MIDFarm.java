@@ -4,6 +4,10 @@
  */
 package view;
 
+import factory.ConexaoServidor;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+
 /**
  *
  * @author Cliente
@@ -15,6 +19,7 @@ public class MIDFarm extends javax.swing.JInternalFrame {
      */
     public MIDFarm() {
         initComponents();
+        getContentPane().setBackground(java.awt.Color.WHITE);
     }
 
     /**
@@ -31,10 +36,11 @@ public class MIDFarm extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldTempAr = new javax.swing.JTextField();
-        jTextFieldUmidSolo = new javax.swing.JTextField();
-        jTextFieldUmidAr = new javax.swing.JTextField();
+        txtTempAr = new javax.swing.JTextField();
+        txtUmidSolo = new javax.swing.JTextField();
+        txtUmidAr = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jBtLeitura = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -46,44 +52,45 @@ public class MIDFarm extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Umidade do Ar:");
 
-        jTextFieldTempAr.setText("jTextFieldTempAr");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/viewIMG/Adobe Express - file.png"))); // NOI18N
 
-        jTextFieldUmidSolo.setText("jTextFieldUmidSolo");
-        jTextFieldUmidSolo.addActionListener(new java.awt.event.ActionListener() {
+        jBtLeitura.setText("Realizar Aferição");
+        jBtLeitura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldUmidSoloActionPerformed(evt);
+                jBtLeituraActionPerformed(evt);
             }
         });
-
-        jTextFieldUmidAr.setText("jTextFieldUmidAr");
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/viewIMG/Adobe Express - file.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldUmidSolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(54, 54, 54)
-                                .addComponent(jTextFieldTempAr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldUmidAr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(72, 72, 72))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(66, 66, 66)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel4)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtUmidSolo, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                            .addComponent(txtUmidAr))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtLeitura)
+                        .addGap(54, 54, 54))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtTempAr, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(227, 227, 227))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,15 +98,17 @@ public class MIDFarm extends javax.swing.JInternalFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldTempAr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTempAr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldUmidSolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtUmidSolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtLeitura)))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextFieldUmidAr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUmidAr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -109,7 +118,10 @@ public class MIDFarm extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,20 +131,71 @@ public class MIDFarm extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldUmidSoloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUmidSoloActionPerformed
+    private void jBtLeituraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtLeituraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldUmidSoloActionPerformed
+        // Desabilita o botão enquanto a leitura está em andamento
+        jBtLeitura.setEnabled(false);
+
+        // Criando uma thread para evitar travamentos na interface
+        new SwingWorker<String, Void>() {
+            @Override
+            protected String doInBackground() {
+                return ConexaoServidor.solicitarLeitura();
+            }
+
+            @Override
+            protected void done() {
+                jBtLeitura.setEnabled(true); // Reativa o botão
+
+                try {
+                    String dadosSensores = get();
+
+                    // Verifica se houve erro na conexão
+                    if (dadosSensores.startsWith("Erro")) {
+                        JOptionPane.showMessageDialog(MIDFarm.this, dadosSensores, "Erro", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        // DEBUG: Verifica a resposta recebida
+                        System.out.println("Resposta do Servidor:\n" + dadosSensores);
+
+                        // Divide a resposta do servidor corretamente
+                        String[] linhas = dadosSensores.split("\n");
+
+                        for (String linha : linhas) {
+                            if (linha.startsWith("Temperatura")) {
+                                txtTempAr.setText(linha.replace("Temperatura: ", "").replace("°C", "").trim());
+                            } else if (linha.startsWith("Umidade do Ar")) {
+                                txtUmidAr.setText(linha.replace("Umidade do Ar: ", "").replace("%", "").trim());
+                            } else if (linha.startsWith("Umidade do solo")) {
+                                txtUmidSolo.setText(linha.replace("Umidade do solo: ", "").replace("%", "").trim());
+                            }
+                        }
+
+                        // DEBUG: Exibe no console os valores finais
+                        System.out.println("TempAr: " + txtTempAr.getText());
+                        System.out.println("UmidAr: " + txtUmidAr.getText());
+                        System.out.println("UmidSolo: " + txtUmidSolo.getText());
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(MIDFarm.this, "Erro ao processar leitura: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+        }
+                .execute();
+
+    }//GEN-LAST:event_jBtLeituraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtLeitura;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextFieldTempAr;
-    private javax.swing.JTextField jTextFieldUmidAr;
-    private javax.swing.JTextField jTextFieldUmidSolo;
+    private javax.swing.JTextField txtTempAr;
+    private javax.swing.JTextField txtUmidAr;
+    private javax.swing.JTextField txtUmidSolo;
     // End of variables declaration//GEN-END:variables
 }
