@@ -107,19 +107,19 @@ System.err.println("Erro ao atualizar alimento: " + e.getMessage());
     }
 
     //Atualizar os valores dos sensores recebidos do Raspberry Pi
-    public void atualizarCondicoesAtuais(double temperatura, double umidadeAr, double umidadeSolo) {
+    public void atualizarCondicoesAtuais(double temperatura, double umidadeAr) {
         this.temperaturaAtual = temperatura;
         this.umidadeArAtual = umidadeAr;
-        this.umidadeSoloAtual = umidadeSolo;
+        //this.umidadeSoloAtual = umidadeSolo;
     }
 
     //Buscar alimentos compatíveis com as condições atuais dos sensores
-    /*public List<Alimento> buscarAlimentosRecomendados() {
+    public List<Alimento> buscarAlimentosRecomendados() {
         try {
-            return alimentoDAO.buscarPorCondicoes(temperaturaAtual, umidadeArAtual, umidadeSoloAtual);
+            return alimentoDAO.buscarPorCondicoes(temperaturaAtual, umidadeArAtual);
         } catch (SQLException e) {
-            System.err.println("❌ Erro ao buscar alimentos recomendados: " + e.getMessage());
+            System.err.println("Erro ao buscar alimentos recomendados: " + e.getMessage());
             return null;
         }
-    }*/
+    }
 }

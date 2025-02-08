@@ -18,22 +18,6 @@ public class AlimentoDAO {
         this.connection = ConexaoBanco.getConnection();
     }
 
-    public int pegaId(String nome) throws SQLException {
-        String sql = "SELECT id FROM alimentos WHERE nome = ?";
-
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, nome); // Corrigido: Passa o nome no WHERE
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("id"); // Retorna o ID encontrado
-                }
-            }
-        }
-
-        return -1; // Retorna -1 caso o alimento não seja encontrado
-    }
-
     //CREATE - Inserir um novo alimento no banco de dados
     public void create(Alimento alimento) throws SQLException {
         String sql = "INSERT INTO alimentos (nome, genero, temp_ar_ideal, umid_ar_ideal, umid_solo_ideal, estacao_ideal) VALUES (?, ?, ?, ?, ?, ?)";
@@ -136,5 +120,31 @@ public class AlimentoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(AlimentoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public List<Alimento> buscarPorCondicoes(double temperaturaAtual, double umidadeArAtual) throws SQLException {
+        String sql = "SELECT * FROM alimentos WHERE temp_ar_ideal BETWEEN ? - 5 AND ? + 5 AND umid_ar_ideal BETWEEN ? - 10 AND ? + 10";
+        List<Alimento> alimentos = new ArrayList<>();
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setDouble(1, temperaturaAtual);
+            stmt.setDouble(2, temperaturaAtual);
+            stmt.setDouble(3, umidadeArAtual);
+            stmt.setDouble(4, umidadeArAtual);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    alimentos.add(new Alimento(
+                            rs.getString("nome"),
+                            rs.getString("genero"),
+                            rs.getDouble("temp_ar_ideal"),
+                            rs.getDouble("umid_ar_ideal"),
+                            rs.getDouble("umid_solo_ideal"),
+                            rs.getString("estacao_ideal")
+                    ));
+                }
+            }
+        }
+        return alimentos;
     }
 }

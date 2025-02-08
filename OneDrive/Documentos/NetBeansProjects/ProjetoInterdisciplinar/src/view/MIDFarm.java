@@ -175,6 +175,15 @@ public class MIDFarm extends javax.swing.JInternalFrame {
                         System.out.println("TempAr: " + txtTempAr.getText());
                         System.out.println("UmidAr: " + txtUmidAr.getText());
                         System.out.println("UmidSolo: " + txtUmidSolo.getText());
+                        
+                        // Passar os dados dos sensores para a classe MIDrec
+                    double temperatura = Double.parseDouble(txtTempAr.getText());
+                    double umidadeAr = Double.parseDouble(txtUmidAr.getText());
+                    //double umidadeSolo = Double.parseDouble(txtUmidSolo.getText());
+
+                    MIDrec midrec = new MIDrec();
+                    midrec.atualizarDadosSensores(temperatura, umidadeAr);
+                    midrec.setVisible(true);
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(MIDFarm.this, "Erro ao processar leitura: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

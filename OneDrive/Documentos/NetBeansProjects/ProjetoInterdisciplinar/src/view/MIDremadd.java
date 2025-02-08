@@ -238,7 +238,7 @@ public class MIDremadd extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listagemTabela() {
+    public void listagemTabela() {
         try {
             DefaultTableModel model = (DefaultTableModel) jTableadd.getModel();
             model.setRowCount(0); // Limpa a tabela antes de recarregar os dados

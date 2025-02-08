@@ -4,17 +4,49 @@
  */
 package view;
 
+import controller.AlimentoController;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Alimento;
+
 /**
  *
  * @author Cliente
  */
 public class MIDrec extends javax.swing.JInternalFrame {
 
+    private AlimentoController alimentoController;
+
     /**
      * Creates new form MIDrec
      */
     public MIDrec() {
         initComponents();
+        alimentoController = new AlimentoController(null); // Passar a conexão se necessário
+    }
+
+    public void atualizarDadosSensores(double temperatura, double umidadeAr) {
+        alimentoController.atualizarCondicoesAtuais(temperatura, umidadeAr);
+        List<Alimento> alimentosRecomendados = alimentoController.buscarAlimentosRecomendados();
+
+        if (alimentosRecomendados != null) {
+            DefaultTableModel model = (DefaultTableModel) jTableRec.getModel();
+            model.setRowCount(0); // Limpa a tabela antes de adicionar novos dados
+
+            for (Alimento alimento : alimentosRecomendados) {
+                model.addRow(new Object[]{
+                    alimento.getNome(),
+                    alimento.getGenero(),
+                    alimento.getTempArIdeal(),
+                    alimento.getUmidArIdeal(),
+                    alimento.getUmidSoloIdeal(),
+                    alimento.getEstacaoIdeal()
+                });
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Nenhum alimento recomendado encontrado.", "Informação", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     /**
