@@ -5,6 +5,7 @@
 package view;
 
 import factory.ConexaoServidor;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
@@ -52,6 +53,18 @@ public class MIDFarm extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Umidade do Ar:");
 
+        txtUmidSolo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUmidSoloActionPerformed(evt);
+            }
+        });
+
+        txtUmidAr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUmidArActionPerformed(evt);
+            }
+        });
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/viewIMG/Adobe Express - file.png"))); // NOI18N
 
         jBtLeitura.setText("Realizar Aferição");
@@ -66,51 +79,48 @@ public class MIDFarm extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(66, 66, 66))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(72, 72, 72)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtUmidAr, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtLeitura)
-                        .addGap(54, 54, 54))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtTempAr, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtUmidAr, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(27, 27, 27)
+                                .addComponent(txtUmidSolo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(90, 90, 90)
+                        .addComponent(jBtLeitura))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTempAr, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUmidSolo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel4)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtTempAr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtLeitura)
                     .addComponent(jLabel3)
-                    .addComponent(txtUmidAr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                    .addComponent(txtUmidAr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtLeitura))
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtUmidSolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,7 +134,9 @@ public class MIDFarm extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -159,15 +171,25 @@ public class MIDFarm extends javax.swing.JInternalFrame {
                         // Divide a resposta do servidor corretamente
                         String[] linhas = dadosSensores.split("\n");
 
+                        double temperatura = 0;
+                        double umidadeAr = 0;
+
                         for (String linha : linhas) {
                             linha = linha.trim();
-                            
-                            if (linha.startsWith("Temperatura")) {
+
+                            /*if (linha.startsWith("Temperatura")) {
                                 txtTempAr.setText(linha.replace("Temperatura: ", "").replace("°C", "").trim());
                             } else if (linha.startsWith("Umidade do Ar")) {
                                 txtUmidAr.setText(linha.replace("Umidade do Ar: ", "").replace("%", "").trim());
-                            } else if (linha.toLowerCase().contains("umidade do solo") || linha.toLowerCase().contains("solo")) {  
+                            } else if (linha.toLowerCase().contains("umidade do solo") || linha.toLowerCase().contains("solo")) {
                                 txtUmidSolo.setText(linha.replace("Umidade do solo: ", "").replace("%", "").trim());
+                            }*/
+                            if (linha.startsWith("Temperatura")) {
+                                temperatura = Double.parseDouble(linha.replace("Temperatura: ", "").replace("°C", "").trim());
+                                txtTempAr.setText(String.valueOf(temperatura));
+                            } else if (linha.startsWith("Umidade do Ar")) {
+                                umidadeAr = Double.parseDouble(linha.replace("Umidade do Ar: ", "").replace("%", "").trim());
+                                txtUmidAr.setText(String.valueOf(umidadeAr));
                             }
                         }
 
@@ -175,15 +197,47 @@ public class MIDFarm extends javax.swing.JInternalFrame {
                         System.out.println("TempAr: " + txtTempAr.getText());
                         System.out.println("UmidAr: " + txtUmidAr.getText());
                         System.out.println("UmidSolo: " + txtUmidSolo.getText());
-                        
-                        // Passar os dados dos sensores para a classe MIDrec
-                    double temperatura = Double.parseDouble(txtTempAr.getText());
-                    double umidadeAr = Double.parseDouble(txtUmidAr.getText());
-                    //double umidadeSolo = Double.parseDouble(txtUmidSolo.getText());
 
-                    MIDrec midrec = new MIDrec();
-                    midrec.atualizarDadosSensores(temperatura, umidadeAr);
-                    midrec.setVisible(true);
+                        // Passar os dados dos sensores para a classe MIDrec
+                        //double temperatura = Double.parseDouble(txtTempAr.getText());
+                        //double umidadeAr = Double.parseDouble(txtUmidAr.getText());
+                        //double umidadeSolo = Double.parseDouble(txtUmidSolo.getText());
+                        // Definir os limites
+                        double temperaturaMinima = 10;
+                        double temperaturaMaxima = 35;
+                        double umidadeMinima = 20;
+                        double umidadeMaxima = 95;
+
+                        // Verificar se os valores estão fora dos limites
+                        if (temperatura < temperaturaMinima || temperatura > temperaturaMaxima) {
+                            JOptionPane.showMessageDialog(MIDFarm.this,
+                                    "Temperatura fora dos limites ideais!\n"
+                                    + "Temperatura atual: " + temperatura + "°C\n"
+                                    + "Limites: " + temperaturaMinima + "°C a " + temperaturaMaxima + "°C",
+                                    "Alerta de Temperatura",
+                                    JOptionPane.WARNING_MESSAGE);
+                        }
+
+                        if (umidadeAr < umidadeMinima || umidadeAr > umidadeMaxima) {
+                            JOptionPane.showMessageDialog(MIDFarm.this,
+                                    "Umidade do Ar fora dos limites ideais!\n"
+                                    + "Umidade atual: " + umidadeAr + "%\n"
+                                    + "Limites: " + umidadeMinima + "% a " + umidadeMaxima + "%",
+                                    "Alerta de Umidade",
+                                    JOptionPane.WARNING_MESSAGE);
+                        }
+
+                        MIDrec midrec = new MIDrec();
+                        midrec.atualizarDadosSensores(temperatura, umidadeAr);
+
+                        // Adiciona o MIDrec ao JDesktopPane (se estiver usando MDI)
+                        if (getParent() instanceof JDesktopPane) {
+                            JDesktopPane desktopPane = (JDesktopPane) getParent();
+                            desktopPane.add(midrec);
+                            midrec.setVisible(true);
+                            midrec.setLocation((desktopPane.getWidth() - midrec.getWidth()) / 2,
+                                    (desktopPane.getHeight() - midrec.getHeight()) / 2);
+                        }
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(MIDFarm.this, "Erro ao processar leitura: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -194,6 +248,14 @@ public class MIDFarm extends javax.swing.JInternalFrame {
                 .execute();
 
     }//GEN-LAST:event_jBtLeituraActionPerformed
+
+    private void txtUmidArActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUmidArActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUmidArActionPerformed
+
+    private void txtUmidSoloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUmidSoloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUmidSoloActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

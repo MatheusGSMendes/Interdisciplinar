@@ -5,7 +5,11 @@
 package view;
 
 import controller.AlimentoController;
+import dao.AlimentoDAO;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Alimento;
@@ -17,6 +21,7 @@ import model.Alimento;
 public class MIDrec extends javax.swing.JInternalFrame {
 
     private AlimentoController alimentoController;
+    AlimentoDAO daoAliment = new AlimentoDAO();
 
     /**
      * Creates new form MIDrec
@@ -26,11 +31,34 @@ public class MIDrec extends javax.swing.JInternalFrame {
         alimentoController = new AlimentoController(null); // Passar a conexão se necessário
     }
 
+    public void listagemtabela() {
+        try {
+            DefaultTableModel model = (DefaultTableModel) jTableRec.getModel();
+            model.setRowCount(0); // Limpa a tabela antes de recarregar os dados
+
+            List<Alimento> alimentos = daoAliment.readAll();
+            for (Alimento alimento : alimentos) {
+                model.addRow(new Object[]{
+                    //alimento.getId(),
+                    alimento.getNome(),
+                    alimento.getGenero(),
+                    alimento.getTempArIdeal(),
+                    alimento.getUmidArIdeal(),
+                    alimento.getUmidSoloIdeal(),
+                    alimento.getEstacaoIdeal()
+                });
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MIDremadd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public void atualizarDadosSensores(double temperatura, double umidadeAr) {
         alimentoController.atualizarCondicoesAtuais(temperatura, umidadeAr);
         List<Alimento> alimentosRecomendados = alimentoController.buscarAlimentosRecomendados();
 
-        if (alimentosRecomendados != null) {
+        if (alimentosRecomendados != null && !alimentosRecomendados.isEmpty()) {
             DefaultTableModel model = (DefaultTableModel) jTableRec.getModel();
             model.setRowCount(0); // Limpa a tabela antes de adicionar novos dados
 
@@ -44,6 +72,11 @@ public class MIDrec extends javax.swing.JInternalFrame {
                     alimento.getEstacaoIdeal()
                 });
             }
+
+            System.out.println("Temperatura: " + temperatura);
+            System.out.println("Umidade do Ar: " + umidadeAr);
+            System.out.println("Alimentos Recomendados: " + alimentosRecomendados);
+
         } else {
             JOptionPane.showMessageDialog(this, "Nenhum alimento recomendado encontrado.", "Informação", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -62,6 +95,7 @@ public class MIDrec extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableRec = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -80,26 +114,37 @@ public class MIDrec extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(jTableRec);
 
+        jLabel2.setFont(new java.awt.Font("OCR A Extended", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 204, 153));
+        jLabel2.setText("Recomendações");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -108,6 +153,7 @@ public class MIDrec extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableRec;
