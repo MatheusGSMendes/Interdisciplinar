@@ -9,7 +9,9 @@ public class ConexaoServidor {
     private static final int porta = 5555;  // Porta configurada no servidor
 
     public static String solicitarLeitura() {
-        try (Socket socket = new Socket(servidorIP, porta); PrintWriter out = new PrintWriter(socket.getOutputStream(), true); BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+        try (Socket socket = new Socket(servidorIP, porta); 
+             PrintWriter out = new PrintWriter(socket.getOutputStream(), true); 
+             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
             // Envia uma solicitação de leitura para o servidor
             out.println("GET_DATA");

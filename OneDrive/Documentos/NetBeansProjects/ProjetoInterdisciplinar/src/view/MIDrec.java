@@ -31,7 +31,7 @@ public class MIDrec extends javax.swing.JInternalFrame {
         alimentoController = new AlimentoController(null); // Passar a conexão se necessário
     }
 
-    public void listagemtabela() {
+    /*public void listagemtabela() {
         try {
             DefaultTableModel model = (DefaultTableModel) jTableRec.getModel();
             model.setRowCount(0); // Limpa a tabela antes de recarregar os dados
@@ -52,7 +52,7 @@ public class MIDrec extends javax.swing.JInternalFrame {
             Logger.getLogger(MIDremadd.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
+    }*/
 
     public void atualizarDadosSensores(double temperatura, double umidadeAr) {
         alimentoController.atualizarCondicoesAtuais(temperatura, umidadeAr);

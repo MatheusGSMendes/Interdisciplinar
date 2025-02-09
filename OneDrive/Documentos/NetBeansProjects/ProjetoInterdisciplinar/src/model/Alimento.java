@@ -2,7 +2,7 @@ package model;
 
 public class Alimento {
 
-    private int id;
+    //private int id;
     private String nome;
     private String genero;
     private double tempArIdeal;
@@ -23,13 +23,13 @@ public class Alimento {
     }
 
     // Getters e Setters
-    public int getId() {
+   /* public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
+    }*/
 
     public String getNome() {
         return nome;
