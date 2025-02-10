@@ -3,7 +3,6 @@ package dao;
 import com.mysql.cj.xdevapi.Result;
 import factory.ConexaoBanco;
 import model.Alimento;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +121,7 @@ public class AlimentoDAO {
         }
     }
 
+    //*INSERIR UMIDADE DO SOLO*
     public List<Alimento> buscarPorCondicoes(double temperaturaAtual, double umidadeArAtual) throws SQLException {
         String sql = "SELECT * FROM alimentos WHERE temp_ar_ideal BETWEEN ? - 5 AND ? + 5 AND umid_ar_ideal BETWEEN ? - 10 AND ? + 10";
         List<Alimento> alimentos = new ArrayList<>();

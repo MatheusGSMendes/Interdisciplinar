@@ -25,7 +25,6 @@ public class AlimentoController {
     //Criar um novo alimento no banco de dados
     public void adicionarAlimento(String nome, String genero, double tempAr, double umidAr, double umidSolo, String estacao) {
         try {
-            //teste
 
             Alimento alimento = new Alimento(nome, genero, tempAr, umidAr, umidSolo, estacao);
             alimentoDAO.create(alimento);
@@ -62,7 +61,6 @@ public class AlimentoController {
     }
 
     //Atualizar um alimento existente
-    //public void atualizarAlimento(String nome, String genero, double tempAr, double umidAr, double umidSolo, String estacao) {
     public void atualizarAlimento(String nomeAntigo, Alimento novoAlimento) {
         try {
             // Chama o método de atualização do DAO
@@ -75,27 +73,6 @@ public class AlimentoController {
         }
     }
 
-    /*try {
-Alimento alimento = new Alimento(nome, genero, tempAr, umidAr, umidSolo, estacao);
-alimentoDAO.update(alimento, nomeAntigo);
-System.out.println("Alimento atualizado com sucesso!");
-} catch (SQLException e) {
-System.err.println("Erro ao atualizar alimento: " + e.getMessage());
-}*/
- /*if (nomeAntigo == null || nomeAntigo.isEmpty()) {
-                throw new IllegalArgumentException("O nome antigo do alimento deve ser informado para atualização.");
-            }*/
- /*try {
-            Alimento alimento = new Alimento(nome, genero, tempAr, umidAr, umidSolo, estacao);
-            alimentoDAO.update(alimento);
-            System.out.println("Alimento atualizado com sucesso!");
-
-        } catch (SQLException ex) {
-            System.err.println("Erro ao atualizar alimento: " + ex.getMessage());
-        } catch (IllegalArgumentException e) {
-            System.err.println("Erro: " + e.getMessage());
-        }*/
-    
 //Remover um alimento do banco de dados
     public void removerAlimento(String nome) {
         try {
@@ -107,6 +84,7 @@ System.err.println("Erro ao atualizar alimento: " + e.getMessage());
     }
 
     //Atualizar os valores dos sensores recebidos do Raspberry Pi
+    //*INSERIR UMIDADE DO SOLO*
     public void atualizarCondicoesAtuais(double temperatura, double umidadeAr) {
         this.temperaturaAtual = temperatura;
         this.umidadeArAtual = umidadeAr;
@@ -114,6 +92,7 @@ System.err.println("Erro ao atualizar alimento: " + e.getMessage());
     }
 
     //Buscar alimentos compatíveis com as condições atuais dos sensores
+    //*INSERIR UMIDADE DO SOLO (umidadeSoloAtual)
     public List<Alimento> buscarAlimentosRecomendados() {
         try {
             return alimentoDAO.buscarPorCondicoes(temperaturaAtual, umidadeArAtual);

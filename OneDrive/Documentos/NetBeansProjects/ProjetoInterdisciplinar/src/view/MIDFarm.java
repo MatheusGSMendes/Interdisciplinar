@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package view;
 
 import factory.ConexaoServidor;
@@ -9,15 +5,8 @@ import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
-/**
- *
- * @author Cliente
- */
 public class MIDFarm extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form MIDFarm
-     */
     public MIDFarm() {
         initComponents();
         getContentPane().setBackground(java.awt.Color.WHITE);
@@ -45,6 +34,7 @@ public class MIDFarm extends javax.swing.JInternalFrame {
 
         jTextField1.setText("jTextField1");
 
+        setBackground(new java.awt.Color(0, 0, 0));
         setClosable(true);
 
         jLabel1.setText("Temperatura do ar:");
@@ -173,24 +163,21 @@ public class MIDFarm extends javax.swing.JInternalFrame {
 
                         double temperatura = 0;
                         double umidadeAr = 0;
+                        //double umidadeSolo = 0;
 
                         for (String linha : linhas) {
                             linha = linha.trim();
 
-                            /*if (linha.startsWith("Temperatura")) {
-                                txtTempAr.setText(linha.replace("Temperatura: ", "").replace("°C", "").trim());
-                            } else if (linha.startsWith("Umidade do Ar")) {
-                                txtUmidAr.setText(linha.replace("Umidade do Ar: ", "").replace("%", "").trim());
-                            } else if (linha.toLowerCase().contains("umidade do solo") || linha.toLowerCase().contains("solo")) {
-                                txtUmidSolo.setText(linha.replace("Umidade do solo: ", "").replace("%", "").trim());
-                            }*/
                             if (linha.startsWith("Temperatura")) {
                                 temperatura = Double.parseDouble(linha.replace("Temperatura: ", "").replace("°C", "").trim());
                                 txtTempAr.setText(String.valueOf(temperatura));
                             } else if (linha.startsWith("Umidade do Ar")) {
                                 umidadeAr = Double.parseDouble(linha.replace("Umidade do Ar: ", "").replace("%", "").trim());
                                 txtUmidAr.setText(String.valueOf(umidadeAr));
-                            }
+                            } /* if (linha.startsWith("Umidade do solo")) {
+                                umidadeSolo = Double.parseDouble(linha.replace("Umidade do solo: ", "").replace("%", "").trim());
+                                txtUmidSolo.setText(String.valueOf(umidadeSolo));
+                            }*/
                         }
 
                         // DEBUG: Exibe no console os valores finais
@@ -198,11 +185,6 @@ public class MIDFarm extends javax.swing.JInternalFrame {
                         System.out.println("UmidAr: " + txtUmidAr.getText());
                         System.out.println("UmidSolo: " + txtUmidSolo.getText());
 
-                        // Passar os dados dos sensores para a classe MIDrec
-                        //double temperatura = Double.parseDouble(txtTempAr.getText());
-                        //double umidadeAr = Double.parseDouble(txtUmidAr.getText());
-                        //double umidadeSolo = Double.parseDouble(txtUmidSolo.getText());
-                        // Definir os limites
                         double temperaturaMinima = 10;
                         double temperaturaMaxima = 35;
                         double umidadeMinima = 20;
@@ -227,7 +209,9 @@ public class MIDFarm extends javax.swing.JInternalFrame {
                                     JOptionPane.WARNING_MESSAGE);
                         }
 
+                        // Passar os dados dos sensores para a classe MIDrec
                         MIDrec midrec = new MIDrec();
+                        //*INSERIR UMIDADE DO SOLO (umidadeSolo)*
                         midrec.atualizarDadosSensores(temperatura, umidadeAr);
 
                         // Adiciona o MIDrec ao JDesktopPane (se estiver usando MDI)

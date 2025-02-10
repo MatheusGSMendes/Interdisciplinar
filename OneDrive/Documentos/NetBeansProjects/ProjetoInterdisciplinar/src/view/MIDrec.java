@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package view;
 
 import controller.AlimentoController;
@@ -14,46 +10,17 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Alimento;
 
-/**
- *
- * @author Cliente
- */
 public class MIDrec extends javax.swing.JInternalFrame {
 
     private AlimentoController alimentoController;
     AlimentoDAO daoAliment = new AlimentoDAO();
 
-    /**
-     * Creates new form MIDrec
-     */
     public MIDrec() {
         initComponents();
         alimentoController = new AlimentoController(null); // Passar a conexão se necessário
     }
 
-    /*public void listagemtabela() {
-        try {
-            DefaultTableModel model = (DefaultTableModel) jTableRec.getModel();
-            model.setRowCount(0); // Limpa a tabela antes de recarregar os dados
-
-            List<Alimento> alimentos = daoAliment.readAll();
-            for (Alimento alimento : alimentos) {
-                model.addRow(new Object[]{
-                    //alimento.getId(),
-                    alimento.getNome(),
-                    alimento.getGenero(),
-                    alimento.getTempArIdeal(),
-                    alimento.getUmidArIdeal(),
-                    alimento.getUmidSoloIdeal(),
-                    alimento.getEstacaoIdeal()
-                });
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(MIDremadd.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }*/
-
+    //*INSERIR UMIDADE DO SOLO (umidadeSolo)*
     public void atualizarDadosSensores(double temperatura, double umidadeAr) {
         alimentoController.atualizarCondicoesAtuais(temperatura, umidadeAr);
         List<Alimento> alimentosRecomendados = alimentoController.buscarAlimentosRecomendados();
@@ -75,6 +42,7 @@ public class MIDrec extends javax.swing.JInternalFrame {
 
             System.out.println("Temperatura: " + temperatura);
             System.out.println("Umidade do Ar: " + umidadeAr);
+            //System.out.println("Umidade do Solo: " + umidadeSolo);
             System.out.println("Alimentos Recomendados: " + alimentosRecomendados);
 
         } else {
@@ -92,11 +60,13 @@ public class MIDrec extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollBar1 = new javax.swing.JScrollBar();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableRec = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(0, 36, 0));
         setClosable(true);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/viewIMG/Adobe Express - file.png"))); // NOI18N
@@ -118,33 +88,44 @@ public class MIDrec extends javax.swing.JInternalFrame {
         jLabel2.setForeground(new java.awt.Color(0, 204, 153));
         jLabel2.setText("Recomendações");
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(jLabel2)))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(26, 26, 26))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -154,6 +135,7 @@ public class MIDrec extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableRec;

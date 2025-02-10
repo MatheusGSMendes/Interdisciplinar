@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package view;
 
 import dao.AlimentoDAO;
@@ -16,18 +12,10 @@ import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-/**
- *
- * @author Cliente
- */
 public class MIDremadd extends javax.swing.JInternalFrame {
 
     AlimentoDAO daoAlimento = new AlimentoDAO();
-    //private int idSelecionado = -1; // Armazena o ID do item selecionado
 
-    /**
-     * Creates new form MIDremadd
-     */
     public MIDremadd() {
         initComponents();
         getContentPane().setBackground(Color.WHITE);
@@ -55,11 +43,6 @@ public class MIDremadd extends javax.swing.JInternalFrame {
                     txtEstacao.setText(jTableadd.getModel().getValueAt(r, 5).toString());
 
                 }
-                /*try {
-                    daoAlimento.pegaId(jTableadd.getModel().getValueAt(r, 0).toString());
-                } catch (SQLException ex) {
-                    Logger.getLogger(MIDremadd.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
 
             }
 
@@ -293,10 +276,6 @@ public class MIDremadd extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Selecione um alimento para deletar!");
             return;
         }
-        /*if (idSelecionado == -1) {
-            JOptionPane.showMessageDialog(this, "Selecione um alimento para deletar!");
-            return;
-        }*/
 
         String nome = jTableadd.getModel().getValueAt(row, 0).toString();
         int confirm = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja deletar esse item?", "Confirmar", JOptionPane.YES_NO_OPTION);

@@ -10,8 +10,8 @@ public class ConexaoServidor {
 
     public static String solicitarLeitura() {
         try (Socket socket = new Socket(servidorIP, porta); 
-             PrintWriter out = new PrintWriter(socket.getOutputStream(), true); 
-             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true); 
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
             // Envia uma solicitação de leitura para o servidor
             out.println("GET_DATA");

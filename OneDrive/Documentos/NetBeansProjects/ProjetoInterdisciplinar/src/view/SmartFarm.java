@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import view.MIDrec;
@@ -9,15 +5,8 @@ import view.MIDrec;
 import view.MIDremadd;
 import view.MIDremadd;
 
-/**
- *
- * @author Cliente
- */
 public class SmartFarm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SmartFarm
-     */
     public SmartFarm() {
         initComponents();
     }
@@ -37,8 +26,6 @@ public class SmartFarm extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -73,7 +60,11 @@ public class SmartFarm extends javax.swing.JFrame {
                 .addGap(0, 68, Short.MAX_VALUE))
         );
 
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(224, 35));
+
         jMenu1.setText("📰Informações ");
+        jMenu1.setMinimumSize(new java.awt.Dimension(90, 50));
+        jMenu1.setPreferredSize(new java.awt.Dimension(96, 30));
 
         jMenuItem2.setText("📰Informações");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -84,18 +75,6 @@ public class SmartFarm extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
-
-        jMenu3.setText("➕Recomendações");
-
-        jMenuItem3.setText("➕Recomendações");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem3);
-
-        jMenuBar1.add(jMenu3);
 
         jMenu4.setText("📈Remoção e Adição");
 
@@ -134,22 +113,15 @@ public class SmartFarm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-     
+
         MIDFarm telainf = new MIDFarm();
         jDesktopPane1.add(telainf);
         telainf.setVisible(rootPaneCheckingEnabled);
-        
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-
-        MIDrec telaRec = new MIDrec();
-        jDesktopPane1.add(telaRec);
-        telaRec.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        
+
         MIDremadd telaremadd = new MIDremadd();
         jDesktopPane1.add(telaremadd);
         telaremadd.setVisible(rootPaneCheckingEnabled);
@@ -194,11 +166,9 @@ public class SmartFarm extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
