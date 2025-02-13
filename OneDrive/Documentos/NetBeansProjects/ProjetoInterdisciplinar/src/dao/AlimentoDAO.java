@@ -122,7 +122,7 @@ public class AlimentoDAO {
     }
 
     //*INSERIR UMIDADE DO SOLO*
-    public List<Alimento> buscarPorCondicoes(double temperaturaAtual, double umidadeArAtual) throws SQLException {
+    public List<Alimento> buscarPorCondicoes(double temperaturaAtual, double umidadeArAtual, double umidSoloAtual) throws SQLException {
         String sql = "SELECT * FROM alimentos WHERE temp_ar_ideal BETWEEN ? - 5 AND ? + 5 AND umid_ar_ideal BETWEEN ? - 10 AND ? + 10";
         List<Alimento> alimentos = new ArrayList<>();
 
@@ -131,6 +131,8 @@ public class AlimentoDAO {
             stmt.setDouble(2, temperaturaAtual);
             stmt.setDouble(3, umidadeArAtual);
             stmt.setDouble(4, umidadeArAtual);
+            //stmt.setDouble(5, umidSoloAtual);
+            //stmt.setDouble(6, umidSoloAtual);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {

@@ -21,8 +21,8 @@ public class MIDrec extends javax.swing.JInternalFrame {
     }
 
     //*INSERIR UMIDADE DO SOLO (umidadeSolo)*
-    public void atualizarDadosSensores(double temperatura, double umidadeAr) {
-        alimentoController.atualizarCondicoesAtuais(temperatura, umidadeAr);
+    public void atualizarDadosSensores(double temperatura, double umidadeAr, double umidadeSolo) {
+        alimentoController.atualizarCondicoesAtuais(temperatura, umidadeAr, umidadeSolo);
         List<Alimento> alimentosRecomendados = alimentoController.buscarAlimentosRecomendados();
 
         if (alimentosRecomendados != null && !alimentosRecomendados.isEmpty()) {
@@ -42,7 +42,7 @@ public class MIDrec extends javax.swing.JInternalFrame {
 
             System.out.println("Temperatura: " + temperatura);
             System.out.println("Umidade do Ar: " + umidadeAr);
-            //System.out.println("Umidade do Solo: " + umidadeSolo);
+            System.out.println("Umidade do Solo: " + umidadeSolo);
             System.out.println("Alimentos Recomendados: " + alimentosRecomendados);
 
         } else {

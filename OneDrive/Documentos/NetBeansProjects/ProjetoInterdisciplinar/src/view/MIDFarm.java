@@ -163,7 +163,7 @@ public class MIDFarm extends javax.swing.JInternalFrame {
 
                         double temperatura = 0;
                         double umidadeAr = 0;
-                        //double umidadeSolo = 0;
+                        double umidadeSolo = 0;
 
                         for (String linha : linhas) {
                             linha = linha.trim();
@@ -174,10 +174,10 @@ public class MIDFarm extends javax.swing.JInternalFrame {
                             } else if (linha.startsWith("Umidade do Ar")) {
                                 umidadeAr = Double.parseDouble(linha.replace("Umidade do Ar: ", "").replace("%", "").trim());
                                 txtUmidAr.setText(String.valueOf(umidadeAr));
-                            } /* if (linha.startsWith("Umidade do solo")) {
+                            }  if (linha.startsWith("Umidade do solo")) {
                                 umidadeSolo = Double.parseDouble(linha.replace("Umidade do solo: ", "").replace("%", "").trim());
                                 txtUmidSolo.setText(String.valueOf(umidadeSolo));
-                            }*/
+                            }
                         }
 
                         // DEBUG: Exibe no console os valores finais
@@ -187,8 +187,11 @@ public class MIDFarm extends javax.swing.JInternalFrame {
 
                         double temperaturaMinima = 10;
                         double temperaturaMaxima = 35;
-                        double umidadeMinima = 20;
+                        double umidadeMinima = 30;
                         double umidadeMaxima = 95;
+                        double umidadeSoloMinima = 40;
+                        double umidadeSoloMaxima = 90;
+                        
 
                         // Verificar se os valores estão fora dos limites
                         if (temperatura < temperaturaMinima || temperatura > temperaturaMaxima) {
@@ -208,11 +211,20 @@ public class MIDFarm extends javax.swing.JInternalFrame {
                                     "Alerta de Umidade",
                                     JOptionPane.WARNING_MESSAGE);
                         }
+                        
+                        if (umidadeSolo < umidadeSoloMinima || umidadeSolo > umidadeSoloMaxima) {
+                            JOptionPane.showMessageDialog(MIDFarm.this,
+                                    "Umidade do Solo fora dos limites ideais!\n"
+                                    + "Umidade atual: " + umidadeSolo + "%\n"
+                                    + "Limites: " + umidadeSoloMinima + "% a " + umidadeSoloMaxima + "%",
+                                    "Alerta de Umidade",
+                                    JOptionPane.WARNING_MESSAGE);
+                        }
 
                         // Passar os dados dos sensores para a classe MIDrec
                         MIDrec midrec = new MIDrec();
                         //*INSERIR UMIDADE DO SOLO (umidadeSolo)*
-                        midrec.atualizarDadosSensores(temperatura, umidadeAr);
+                        midrec.atualizarDadosSensores(temperatura, umidadeAr, umidadeSolo);
 
                         // Adiciona o MIDrec ao JDesktopPane (se estiver usando MDI)
                         if (getParent() instanceof JDesktopPane) {

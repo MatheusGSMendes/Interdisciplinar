@@ -5,7 +5,7 @@ import java.net.*;
 
 public class ConexaoServidor {
 
-    private static final String servidorIP = "192.168.2.166";  // IP do Raspberry Pi
+    private static final String servidorIP = "172.20.10.14";  // IP do Raspberry Pi
     private static final int porta = 5555;  // Porta configurada no servidor
 
     public static String solicitarLeitura() {
@@ -18,12 +18,18 @@ public class ConexaoServidor {
 
             // Aguarda a resposta do servidor
             StringBuilder resposta = new StringBuilder();
-            String linha;
+            char linha;
             int contador = 0;
-            while ((linha = in.readLine()) != null && contador < 2) { // Lê apenas duas linhas
-                resposta.append(linha).append("\n");
+            //while ((linha = in.readLine()) != null && contador < 2) { // Lê apenas duas linhas
+               // while ((linha = in.readLine()) != null) {
+               while (true) {
+                linha = (char)in.read();
+                if (linha == 'E') break;
+                resposta.append(linha);
                 contador++;
             }
+               
+               System.out.println("fim");
 
             return resposta.toString().trim();
 

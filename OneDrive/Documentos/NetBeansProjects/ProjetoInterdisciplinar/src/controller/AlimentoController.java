@@ -34,7 +34,7 @@ public class AlimentoController {
         }
     }
 
-    //Buscar um alimento pelo nome
+    //*Buscar um alimento pelo nome*
     public Alimento buscarAlimento(String nome) {
         try {
             Alimento alimento = alimentoDAO.read(nome);
@@ -85,17 +85,17 @@ public class AlimentoController {
 
     //Atualizar os valores dos sensores recebidos do Raspberry Pi
     //*INSERIR UMIDADE DO SOLO*
-    public void atualizarCondicoesAtuais(double temperatura, double umidadeAr) {
+    public void atualizarCondicoesAtuais(double temperatura, double umidadeAr, double umidadeSolo) {
         this.temperaturaAtual = temperatura;
         this.umidadeArAtual = umidadeAr;
-        //this.umidadeSoloAtual = umidadeSolo;
+        this.umidadeSoloAtual = umidadeSolo;
     }
 
     //Buscar alimentos compatíveis com as condições atuais dos sensores
     //*INSERIR UMIDADE DO SOLO (umidadeSoloAtual)
     public List<Alimento> buscarAlimentosRecomendados() {
         try {
-            return alimentoDAO.buscarPorCondicoes(temperaturaAtual, umidadeArAtual);
+            return alimentoDAO.buscarPorCondicoes(temperaturaAtual, umidadeArAtual, umidadeSoloAtual);
         } catch (SQLException e) {
             System.err.println("Erro ao buscar alimentos recomendados: " + e.getMessage());
             return null;
